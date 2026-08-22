@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f1ea">
+  <title>静心数独</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">九</span><div><h1>静心数独</h1><p>每日片刻，专注此刻</p></div></div>
+      <button id="new-game" class="primary-button">＋ 新游戏</button>
+    </header>
+
+    <section class="game-card" aria-label="数独游戏">
+      <div class="statusbar">
+        <div><span class="label">当前难度</span><strong id="difficulty-label">中级</strong></div>
+        <div class="time-status"><span class="label">游戏时间</span><strong id="timer">00:00</strong><button id="pause" class="pause-button">暂停</button></div>
+        <div><span class="label">错误次数</span><strong><span id="mistakes">0</span></strong></div>
+      </div>
+
+      <div class="board-wrap">
+        <div id="board" class="board" role="grid" aria-label="九乘九数独棋盘"></div>
+        <button id="pause-overlay" class="pause-overlay" aria-label="继续游戏"><span>Ⅱ</span><b>游戏已暂停</b><small>点击继续游戏</small></button>
+      </div>
+
+      <div id="number-pad" class="number-pad" aria-label="数字键盘"></div>
+      <div class="tools">
+        <button id="undo" title="撤销上一步"><span>↶</span>撤销</button>
+        <button id="erase" title="清除当前格"><span>⌫</span>清除</button>
+        <button id="notes" aria-pressed="false"><span>✎</span>笔记</button>
+        <button id="hint"><span>◇</span>提示</button>
+        <button id="restart"><span>↻</span>重新开始</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="new-dialog">
+    <form method="dialog" class="dialog-card">
+      <button class="close" value="cancel" aria-label="关闭">×</button>
+      <p class="eyebrow">NEW PUZZLE</p><h2>选择你的挑战</h2><p class="dialog-copy">每道题均经过唯一解验证</p>
+      <div id="difficulty-options" class="difficulty-options"></div>
+      <button id="start-game" value="default" class="primary-button wide">开始游戏</button>
+    </form>
+  </dialog>
+
+  <dialog id="complete-dialog">
+    <div class="dialog-card complete-card">
+      <div class="trophy">✓</div><p class="eyebrow">PUZZLE COMPLETE</p>
+      <h2>恭喜你完成了数独！</h2>
+      <div class="result-grid"><div><span>难度</span><b id="result-difficulty"></b></div><div><span>用时</span><b id="result-time"></b></div><div><span>错误</span><b id="result-mistakes"></b></div></div>
+      <button id="play-again" class="primary-button wide">再来一局</button>
+    </div>
+  </dialog>
+
+  <dialog id="mistake-dialog">
+    <div class="dialog-card complete-card">
+      <div class="warning-mark">!</div>
+      <h2>已达到 3 次错误</h2><p class="dialog-copy">是否继续游戏？错误次数不会被重置。</p>
+      <div class="dialog-actions"><button id="continue-game" class="secondary-button">继续游戏</button><button id="restart-after-errors" class="primary-button">重新开始</button></div>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/sudoku-solver.js"></script>
+  <script src="js/sudoku-generator.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/game-rules.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
